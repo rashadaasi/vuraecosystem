@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vura Organization — Ecosystem</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#f5c842;--gold-light:#ffe180;--gold-dark:#b8860b;
+  --green:#4ade80;--green-mid:#22c55e;--green-dark:#166534;--green-deep:#052e16;--green-light:#86efac;
+  --purple:#a855f7;--blue:#60a5fa;--red:#f87171;--orange:#fb923c;--cyan:#22d3ee;--pink:#f472b6;
+  --bg:#020702;--bg2:#040e04;--bg3:#071007;
+  --surface:rgba(74,222,128,0.03);--surface2:rgba(74,222,128,0.07);
+  --border:rgba(74,222,128,0.12);--border2:rgba(74,222,128,0.22);
+  --text:#dcfce7;--text2:#86efac;--muted:#4a6b55;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ── BACKGROUND ── */
+.site-bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bg-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
+  background-size:55px 55px;
+}
+.bg-g1{position:absolute;top:-10%;left:-5%;width:60%;height:60%;background:radial-gradient(circle,rgba(245,200,66,0.06),transparent 65%);}
+.bg-g2{position:absolute;bottom:-10%;right:-5%;width:55%;height:55%;background:radial-gradient(circle,rgba(74,222,128,0.06),transparent 65%);}
+.bg-g3{position:absolute;top:40%;left:40%;width:40%;height:40%;background:radial-gradient(circle,rgba(168,85,247,0.04),transparent 65%);}
+.bg-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.015) 3px,rgba(0,0,0,0.015) 4px);}
+
+/* ── WRAPPER ── */
+.wrapper{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:60px 32px 100px;}
+
+/* ── HEADER ── */
+.header{text-align:center;margin-bottom:70px;}
+
+.org-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:3px;color:var(--green);text-transform:uppercase;
+  background:rgba(74,222,128,0.06);border:1px solid var(--border2);
+  padding:6px 18px;border-radius:30px;margin-bottom:28px;
+}
+.org-badge::before{content:'◈';font-size:12px;color:var(--gold);}
+
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:20px;}
+.logo-mark{
+  width:64px;height:64px;border-radius:18px;
+  background:linear-gradient(135deg,var(--green-deep),var(--green-dark),var(--green-mid));
+  border:1px solid rgba(74,222,128,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;font-size:26px;font-weight:900;
+  color:var(--gold);
+  box-shadow:0 0 30px rgba(74,222,128,0.2),inset 0 1px 0 rgba(255,255,255,0.1);
+  position:relative;overflow:hidden;
+}
+.logo-mark::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(245,200,66,0.15),transparent 60%);
+}
+
+.org-title{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(36px,6vw,72px);
+  font-weight:900;letter-spacing:4px;
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 30%,var(--green-light) 70%,var(--green) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.org-sub{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(10px,1.5vw,14px);
+  font-weight:600;letter-spacing:8px;
+  color:var(--muted);text-transform:uppercase;
+  margin-top:8px;
+}
+
+.header-desc{
+  font-size:15px;color:var(--text2);line-height:1.8;
+  max-width:540px;margin:24px auto 0;
+}
+
+/* ── DIVIDER LINE ── */
+.divider{
+  height:1px;margin:0 0 60px;
+  background:linear-gradient(90deg,transparent,var(--border2),rgba(245,200,66,0.3),var(--border2),transparent);
+}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  display:flex;align-items:center;gap:12px;margin-bottom:36px;
+}
+.section-label-text{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:3px;color:var(--muted);text-transform:uppercase;
+  white-space:nowrap;
+}
+.section-label-line{flex:1;height:1px;background:var(--border);}
+.section-label-count{
+  font-family:'Orbitron',monospace;font-size:10px;
+  color:var(--gold);letter-spacing:1px;
+  background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);
+  padding:3px 10px;border-radius:20px;
+}
+
+/* ── PRODUCTS GRID ── */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+
+/* ── PRODUCT BUTTON ── */
+.product-btn{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:28px 26px 24px;
+  border-radius:18px;
+  background:rgba(4,14,4,0.8);
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:all 0.35s cubic-bezier(0.23,1,0.32,1);
+  text-decoration:none;
+  group:true;
+  backdrop-filter:blur(8px);
+  min-height:140px;
+}
+
+/* Hover shimmer */
+.product-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent 50%);
+  opacity:0;transition:opacity 0.35s;pointer-events:none;
+}
+.product-btn:hover::before{opacity:1;}
+
+/* Accent glow line at top */
+.product-btn::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent-color, var(--green));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  border-radius:2px 2px 0 0;
+}
+.product-btn:hover::after{transform:scaleX(1);}
+.product-btn:hover{
+  border-color:var(--accent-border, rgba(74,222,128,0.4));
+  background:rgba(7,16,7,0.95);
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 0 1px var(--accent-border, rgba(74,222,128,0.15)),var(--accent-glow, 0 0 30px rgba(74,222,128,0.1));
+}
+
+/* Glow background blob */
+.product-btn .btn-glow{
+  position:absolute;bottom:-30px;right:-20px;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--accent-bg, rgba(74,222,128,0.04));
+  filter:blur(30px);pointer-events:none;
+  transition:all 0.4s;
+}
+.product-btn:hover .btn-glow{
+  width:160px;height:160px;
+  background:var(--accent-bg-hover, rgba(74,222,128,0.08));
+}
+
+.btn-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+
+.btn-icon{
+  width:46px;height:46px;border-radius:12px;
+  background:var(--accent-bg, rgba(74,222,128,0.08));
+  border:1px solid var(--accent-border, rgba(74,222,128,0.2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  transition:all 0.3s;
+  flex-shrink:0;
+}
+.product-btn:hover .btn-icon{
+  background:var(--accent-bg-hover, rgba(74,222,128,0.14));
+  transform:scale(1.08);
+}
+
+.btn-num{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);letter-spacing:1px;
+  align-self:flex-start;
+}
+
+.btn-name{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(14px,1.8vw,18px);font-weight:700;
+  letter-spacing:1.5px;
+  color:var(--text);
+  margin-bottom:6px;
+  transition:color 0.3s;
+  line-height:1.2;
+}
+.product-btn:hover .btn-name{color:var(--accent-text, var(--green-light));}
+
+.btn-tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);letter-spacing:1px;
+  margin-bottom:14px;
+}
+
+.btn-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:auto;
+}
+.btn-status{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:2px;color:var(--muted);text-transform:uppercase;
+}
+.btn-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent-color, var(--green));
+  box-shadow:0 0 6px var(--accent-color, var(--green));
+  animation:pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.85);}}
+
+.btn-arrow{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--accent-bg, rgba(74,222,128,0.06));
+  border:1px solid var(--accent-border, rgba(74,222,128,0.15));
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--accent-color, var(--green));
+  transition:all 0.3s;
+}
+.product-btn:hover .btn-arrow{
+  background:var(--accent-bg-hover, rgba(74,222,128,0.12));
+  transform:translate(2px,-2px);
+}
+
+/* ── STREAM HERO BUTTON ── */
+.stream-hero{
+  grid-column: 1 / -1;
+  --accent-color:var(--gold);
+  --accent-border:rgba(245,200,66,0.4);
+  --accent-bg:rgba(245,200,66,0.06);
+  --accent-bg-hover:rgba(245,200,66,0.12);
+  --accent-glow:0 0 50px rgba(245,200,66,0.15);
+  --accent-text:var(--gold-light);
+  --btn-label-color:var(--gold);
+  min-height:120px;
+  flex-direction:row;
+  align-items:center;
+  gap:28px;
+  padding:28px 36px;
+}
+.stream-hero .btn-glow{
+  width:300px;height:200px;
+  background:rgba(245,200,66,0.04);
+}
+.stream-hero .btn-top{flex-shrink:0;margin-bottom:0;}
+.stream-hero .stream-info{flex:1;}
+.stream-hero .btn-name{font-size:clamp(20px,3vw,28px);letter-spacing:3px;}
+.stream-hero .btn-tag{margin-bottom:0;}
+.stream-hero-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:3px;color:var(--gold);text-transform:uppercase;
+  background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.25);
+  padding:4px 12px;border-radius:20px;
+  display:inline-block;margin-bottom:8px;
+}
+.stream-hero .btn-icon{
+  width:64px;height:64px;font-size:28px;
+}
+.stream-hero .btn-footer{margin-top:0;}
+
+/* ── COLOR VARIANTS ── */
+.c-gold{
+  --accent-color:var(--gold);
+  --accent-border:rgba(245,200,66,0.3);
+  --accent-bg:rgba(245,200,66,0.06);
+  --accent-bg-hover:rgba(245,200,66,0.12);
+  --accent-glow:0 0 30px rgba(245,200,66,0.1);
+  --accent-text:var(--gold-light);
+}
+.c-green{
+  --accent-color:var(--green);
+  --accent-border:rgba(74,222,128,0.3);
+  --accent-bg:rgba(74,222,128,0.06);
+  --accent-bg-hover:rgba(74,222,128,0.12);
+  --accent-glow:0 0 30px rgba(74,222,128,0.1);
+  --accent-text:var(--green-light);
+}
+.c-purple{
+  --accent-color:var(--purple);
+  --accent-border:rgba(168,85,247,0.3);
+  --accent-bg:rgba(168,85,247,0.06);
+  --accent-bg-hover:rgba(168,85,247,0.12);
+  --accent-glow:0 0 30px rgba(168,85,247,0.12);
+  --accent-text:#d8b4fe;
+}
+.c-blue{
+  --accent-color:var(--blue);
+  --accent-border:rgba(96,165,250,0.3);
+  --accent-bg:rgba(96,165,250,0.06);
+  --accent-bg-hover:rgba(96,165,250,0.12);
+  --accent-glow:0 0 30px rgba(96,165,250,0.1);
+  --accent-text:#bfdbfe;
+}
+.c-orange{
+  --accent-color:var(--orange);
+  --accent-border:rgba(251,146,60,0.3);
+  --accent-bg:rgba(251,146,60,0.06);
+  --accent-bg-hover:rgba(251,146,60,0.12);
+  --accent-glow:0 0 30px rgba(251,146,60,0.1);
+  --accent-text:#fed7aa;
+}
+.c-cyan{
+  --accent-color:var(--cyan);
+  --accent-border:rgba(34,211,238,0.3);
+  --accent-bg:rgba(34,211,238,0.06);
+  --accent-bg-hover:rgba(34,211,238,0.12);
+  --accent-glow:0 0 30px rgba(34,211,238,0.1);
+  --accent-text:#a5f3fc;
+}
+.c-pink{
+  --accent-color:var(--pink);
+  --accent-border:rgba(244,114,182,0.3);
+  --accent-bg:rgba(244,114,182,0.06);
+  --accent-bg-hover:rgba(244,114,182,0.12);
+  --accent-glow:0 0 30px rgba(244,114,182,0.1);
+  --accent-text:#fbcfe8;
+}
+.c-red{
+  --accent-color:var(--red);
+  --accent-border:rgba(248,113,113,0.3);
+  --accent-bg:rgba(248,113,113,0.06);
+  --accent-bg-hover:rgba(248,113,113,0.12);
+  --accent-glow:0 0 30px rgba(248,113,113,0.1);
+  --accent-text:#fecaca;
+}
+
+/* ── FOOTER ── */
+.eco-footer{
+  text-align:center;margin-top:72px;
+  padding-top:40px;
+  border-top:1px solid var(--border);
+}
+.eco-footer-logo{
+  font-family:'Orbitron',monospace;font-size:12px;font-weight:900;
+  letter-spacing:6px;
+  background:linear-gradient(135deg,var(--gold),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;
+}
+.eco-footer-text{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);letter-spacing:2px;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .stream-hero{flex-direction:column;align-items:flex-start;gap:16px;}
+  .stream-hero .btn-footer{width:100%;}
+  .wrapper{padding:40px 18px 80px;}
+  .products-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:420px){
+  .products-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="site-bg">
+  <div class="bg-grid"></div>
+  <div class="bg-g1"></div>
+  <div class="bg-g2"></div>
+  <div class="bg-g3"></div>
+  <div class="bg-scan"></div>
+</div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header class="header reveal">
+    <div class="org-badge">Vura Organization</div>
+    <div class="logo-wrap">
+      <div class="logo-mark">V</div>
+      <div>
+        <div class="org-title">VURA</div>
+        <div class="org-sub">Organization</div>
+      </div>
+    </div>
+    <p class="header-desc">A unified Web3 ecosystem powering the future of decentralized finance, entertainment, social, and beyond — all under one organization.</p>
+  </header>
+
+  <div class="divider reveal"></div>
+
+  <!-- SECTION LABEL -->
+  <div class="section-label reveal">
+    <span class="section-label-text">// ecosystem products</span>
+    <div class="section-label-line"></div>
+    <span class="section-label-count">13 PRODUCTS</span>
+  </div>
+
+  <!-- PRODUCTS GRID -->
+  <div class="products-grid">
+
+    <!-- VURA STREAM — HERO -->
+    <a class="product-btn stream-hero c-gold reveal" href="https://vurastream.live/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">📡</div>
+      </div>
+      <div class="stream-info">
+        <div class="stream-hero-badge">⭑ FLAGSHIP</div>
+        <div class="btn-name">VURA STREAM</div>
+        <div class="btn-tag">// decentralized streaming platform</div>
+        <div class="btn-footer">
+          <span class="btn-status"><span class="btn-dot"></span>Live</span>
+          <div class="btn-arrow">↗</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- 01 VURA WALLET -->
+    <a class="product-btn c-green reveal" href="https://vurawallet.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">👛</div>
+        <span class="btn-num">01</span>
+      </div>
+      <div class="btn-name">VURA WALLET</div>
+      <div class="btn-tag">// web3 multi-chain wallet</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 02 VURA PLAY -->
+    <a class="product-btn c-purple reveal" href="https://vuraplay.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🎮</div>
+        <span class="btn-num">02</span>
+      </div>
+      <div class="btn-name">VURA PLAY</div>
+      <div class="btn-tag">// gamefi & entertainment</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 03 VURA MINING -->
+    <a class="product-btn c-orange reveal" href="https://vuramining-m6nt.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">⛏️</div>
+        <span class="btn-num">03</span>
+      </div>
+      <div class="btn-name">VURA MINING</div>
+      <div class="btn-tag">// decentralized mining protocol</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 04 VURA DAO -->
+    <a class="product-btn c-blue reveal" href="https://vurastream.live/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🏛️</div>
+        <span class="btn-num">04</span>
+      </div>
+      <div class="btn-name">VURA DAO</div>
+      <div class="btn-tag">// decentralized governance</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 05 VURA MARKETPLACE -->
+    <a class="product-btn c-gold reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🛒</div>
+        <span class="btn-num">05</span>
+      </div>
+      <div class="btn-name">VURA MARKETPLACE</div>
+      <div class="btn-tag">// shop with $VT token</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 06 VURA NFT MARKETPLACE -->
+    <a class="product-btn c-pink reveal" href="https://vuranft.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🖼️</div>
+        <span class="btn-num">06</span>
+      </div>
+      <div class="btn-name">VURA NFT</div>
+      <div class="btn-tag">// nft marketplace & launchpad</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 07 VURA TOKEN -->
+    <a class="product-btn c-gold reveal" href="https://vura-token.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🪙</div>
+        <span class="btn-num">07</span>
+      </div>
+      <div class="btn-name">VURA TOKEN</div>
+      <div class="btn-tag">// $VT utility & governance token</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 08 VURA PAY -->
+    <a class="product-btn c-cyan reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">💳</div>
+        <span class="btn-num">08</span>
+      </div>
+      <div class="btn-name">VURA PAY</div>
+      <div class="btn-tag">// crypto payment gateway</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 09 VURA SOCIAL -->
+    <a class="product-btn c-pink reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">💬</div>
+        <span class="btn-num">09</span>
+      </div>
+      <div class="btn-name">VURA SOCIAL</div>
+      <div class="btn-tag">// decentralized social network</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 10 VURA STAKING / INVESTMENTS -->
+    <a class="product-btn c-green reveal" href="https://vurainvestments.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">📈</div>
+        <span class="btn-num">10</span>
+      </div>
+      <div class="btn-name">VURA INVESTMENTS</div>
+      <div class="btn-tag">// staking & investment protocol</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 11 VURA DEX -->
+    <a class="product-btn c-blue reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🔄</div>
+        <span class="btn-num">11</span>
+      </div>
+      <div class="btn-name">VURA DEX</div>
+      <div class="btn-tag">// decentralized exchange</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 12 VURA LEARN -->
+    <a class="product-btn c-orange reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🎓</div>
+        <span class="btn-num">12</span>
+      </div>
+      <div class="btn-name">VURA LEARN</div>
+      <div class="btn-tag">// web3 education platform</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- 13 VURA TICKET -->
+    <a class="product-btn c-purple reveal" href="https://vuramarketplace.vercel.app/" target="_blank" rel="noopener">
+      <div class="btn-glow"></div>
+      <div class="btn-top">
+        <div class="btn-icon">🎟️</div>
+        <span class="btn-num">13</span>
+      </div>
+      <div class="btn-name">VURA TICKET</div>
+      <div class="btn-tag">// nft event ticketing</div>
+      <div class="btn-footer">
+        <span class="btn-status"><span class="btn-dot"></span>Active</span>
+        <div class="btn-arrow">↗</div>
+      </div>
+    </a>
+
+  </div><!-- /grid -->
+
+  <!-- FOOTER -->
+  <footer class="eco-footer reveal">
+    <div class="eco-footer-logo">VURA ORGANIZATION</div>
+    <div class="eco-footer-text">// POWERING THE DECENTRALIZED FUTURE · ALL RIGHTS RESERVED</div>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script>
+// Staggered reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:0.1});
+
+reveals.forEach((el, i) => {
+  el.style.transitionDelay = `${i * 55}ms`;
+  io.observe(el);
+});
+
+// Trigger immediately for elements in viewport
+setTimeout(() => {
+  reveals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight){
+      el.classList.add('visible');
+    }
+  });
+}, 60);
+</script>
+</body>
+</html>
